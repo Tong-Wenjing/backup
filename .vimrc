@@ -15,34 +15,37 @@ Bundle 'gmarik/vundle'
 "vim-script repo
 "
 "Syntax
-Bundle 'asciidoc.vim'
-Bundle 'confluencewiki.vim'
-Bundle 'html5.vim'
+"Bundle 'asciidoc.vim'
+"Bundle 'confluencewiki.vim'
+"Bundle 'html5.vim'
 Bundle 'JavaScript-syntax'
-Bundle 'moin.vim'
+"Bundle 'moin.vim'
 Bundle 'python.vim--Vasiliev'
-Bundle 'xml.vim'
+"Bundle 'xml.vim'
+Bundle 'spf13/PIV'
 "
 ""Color
-Bundle 'desert256.vim'
-Bundle 'Impact'
-Bundle 'matrix.vim'
-Bundle 'vibrantink'
+"Bundle 'desert256.vim'
+"Bundle 'Impact'
+"Bundle 'matrix.vim'
+"Bundle 'vibrantink'
 Bundle 'vividchalk.vim'
 "
 ""Intent
-Bundle 'IndentAnything'
+"Bundle 'IndentAnything'
 Bundle 'Javascript-Indentation'
-Bundle 'mako.vim--Torborg'
+"Bundle 'mako.vim--Torborg'
+Bundle 'php.vim'
 Bundle 'gg/python.vim'
 "
 ""Plugin
 Bundle 'AutoClose--Alves'
+"Bundle 'Shougo/neocomplcache.vim'
 Bundle 'jsbeautify'
-Bundle 'jshint2.vim'
+"Bundle 'jshint2.vim'
 Bundle 'taglist.vim'
 "Bundle 'css_color.vim'
-Bundle 'hallettj/jslint.vim'
+"Bundle 'hallettj/jslint.vim'
 Bundle 'Syntastic'
 "Bundle 'ZenCoding.vim'
 Bundle 'tpope/vim-fugitive'
@@ -57,8 +60,9 @@ let mapleader=','
 let g:mapleader=','
 "syntx enable
 syntax enable
+syntax on
 "Auto switch to current directory
-au BufRead,BufNewFile,BufEnter * cd %:p:h
+"au BufRead,BufNewFile,BufEnter * cd %:p:h
 
 "allow backspacing over everything in insert mode 
 set backspace=indent,eol,start
@@ -84,7 +88,11 @@ set cmdheight=2
 "Set 256 colors
 set t_Co=256
 "Color schema
-colorscheme mystyle_dark
+"colorscheme mystyle_dark
+"colorscheme mystyle_white
+"colorscheme desert256
+colorscheme vividchalk
+"colorscheme vibrantink
 "fold setting
 set foldenable
 set foldmethod=indent
@@ -98,6 +106,7 @@ set cursorline
 set writebackup
 "disable backup after save
 set nobackup
+set paste
 
 "Status bar configuration
 set laststatus=2  "always has status line
@@ -201,7 +210,7 @@ let g:pydiction_menu_height = 20
 let g:syntastic_check_on_open=1
 let g:syntastic_auto_jump=1
 let g:syntastic_mode_map = { 'mode': 'active',
-                               \ 'active_filetypes': ['python', 'php'],
+                               \ 'active_filetypes': ['python', 'php', 'javascript'],
                                \ 'passive_filetypes': ['puppet'] }
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_always_populate_loc_list=1
@@ -214,8 +223,11 @@ let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 "-----------
 "python syntax checker
 "-----------
-let g:syntastic_python_checkers = ['pyflakes']
-
+let g:syntastic_python_checkers=['pyflakes']
+"-----------
+"javascript syntax checker
+"----------
+let g:syntastic_javascript_checkers=['jshint']
 
 "Auto load the .vimrc
 autocmd! bufwritepost .vimrc source ~/.vimrc
