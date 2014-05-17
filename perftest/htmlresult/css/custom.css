@@ -1,0 +1,151 @@
+BODY {
+	color: #404040;
+	font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif;
+
+	/*
+	Some basic font stacks from cssfontstack.com
+
+	Sans Serif
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+	font-family: Tahoma, Verdana, Segoe, sans-serif;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+	font-family: Verdana, Geneva, sans-serif;
+
+	Serif
+	font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif;
+	font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+
+	Monospaced
+	font-family: Consolas, monaco, monospace;
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+	font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+	*/
+
+	/* Ratio ~1.38 */
+	font-size: 0.813em; 	/* ~13px */
+	line-height: 1.385em; 	/* ~18px */
+
+	text-align: center;
+}
+
+/**
+ * LINKS
+ *
+ * -------------------------------------------------------------------------------------------------
+ */
+A {
+	color: black;
+	text-decoration: none
+}
+
+A:hover {
+	text-decoration: underline
+}
+
+/**
+ * LISTS
+ *
+ * -------------------------------------------------------------------------------------------------
+ */
+UL, OL { /* Horizontal & vertical lists */
+	margin: 1.077em 0 1.077em 1.538em; /*  14px 0 14px 20px */
+}
+
+UL LI, OL LI {
+	line-height: 1.385em
+}
+
+UL.vertical { /* Vertical lists */
+	margin: 0
+}
+
+UL.horizontal { /* Horizontal lists */
+	display: inline;
+	margin: 0
+}
+
+UL.horizontal > LI {
+	display: inline-block;
+
+	/* IE */
+	*margin: 1px;
+	zoom: 1;
+	*display: inline;
+}
+
+/**
+ * TABS
+ *
+ * -------------------------------------------------------------------------------------------------
+ */
+.tabs > DIV {
+	border-top: 1px;
+	/*border-top: 1px solid #c7c7c7;*/
+	margin-top: 10px;
+	/*background: #F17C71;*/
+	border-bottom: 100% solid #E95855 !important;
+	/*margin:0 auto;*/	
+}
+
+/* .tabs > DIV H3 {
+	border-bottom: 4px solid #E5E5E5 !important;
+	color: #ccc !important;
+	font-weight: 300;
+	line-height: 186px !important;
+} */
+
+.tabs LI {
+	background: white;
+	border-bottom: 4px solid #E5E5E5;
+	margin-right: 10px;
+}
+
+.tabs A {
+	color: #ccc;
+	display: block;
+	font-size: 18px;
+	font-weight: 300;
+	padding: 14px 24px;
+	text-decoration: none;
+}
+
+.tabs LI:hover {
+	background: #a0cac0;
+	border-bottom: 4px solid #68a697;
+}
+
+.tabs LI:hover A {
+	color: white;
+}
+
+.active {
+	background: #a0cac0 !important;
+	border-bottom: 4px solid #68a697 !important;
+}
+
+.active A {
+	color: white !important;
+}
+
+/* 
+*
+* TABLE
+* 
+ */
+.table {
+	border:1px solid #000;
+	border-bottom:none;
+	border-left:none;
+	text-align:left;
+	margin:auto;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	
+}
+.table td{
+	height:25px;
+	line-height:25px;
+	border-bottom:1px solid #000;
+	border-left:1px solid #000;
+}
