@@ -289,6 +289,30 @@ def parse_sar_page(page_result):
     
     return {"paging_in(KB/s)":paging_in, "paging_out(KB/s)":paging_out}
 
+def parse_sbx_que(sbx_queue):
+    """
+    Parse the sandbox queue statistic result, includes submitted queue and wait for submiting queue
+    Params: sandbox queue statistic result file
+    Return: sandbox queue list
+    Exceptions: ParseResultError
+    """
+    queue_num_list = []
+    try:
+        fd = open(sbx_queue, 'r')
+        i = 1
+        for lines in fd.readlines():
+            items = lines.strip('')
+            queue_num = int(items)
+            
+            queue_num_list.append([i, queue_num])
+            i = i + 1
+    except Exception as err:
+        raise ParseResultError("Parse sandbox queue statistic fail for [%s]" % err)
+    finally:
+        fd.close() 
+    
+    return queue_num_list
+
 if __name__=='__main__':
 
     import sys 
@@ -349,24 +373,59 @@ if __name__=='__main__':
                 root_parse_ret = parse_sar_disk(file_path)
             elif suffix == 'pageStat':
                 paging_parse_ret = parse_sar_page(file_path)
-        
-        cpu_encoded = json.dumps({"cpu":cpu_parse_ret})
-        mem_encoded = json.dumps({"memory":mem_parse_ret})
-        disk_encoded = json.dumps({"disk":{"AppData":appdata_parse_ret, "Root":root_parse_ret}})
-        paging_encoded = json.dumps({"paging":paging_parse_ret})
-        
-        #output the json string to system_resource.js file
-        #result_js = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '../PerfTestRes/htmlresult/js/system_resource.js'))
-        result_js = ret_html_folder + 'js/system_resource.js'
-        if os.path.exists(result_js):
-            os.remove(result_js)
+            elif suffix == 'sbxSubQueStat':
+                sbx_sub_que_parse_ret = parse_sbx_que(file_path)
+            elif suffix == 'sbxWaitQueStat':
+                sbx_wait_que_parse_ret = parse_sbx_que(file_path)
+    except (ParseResultError, Exception), err:
+        sys.exit(err)
+               
+    ################################
+    # output system resource usage result to file 
+    ###############################
+    cpu_encoded = json.dumps({"cpu":cpu_parse_ret})
+    mem_encoded = json.dumps({"memory":mem_parse_ret})
+    disk_encoded = json.dumps({"disk":{"AppData":appdata_parse_ret, "Root":root_parse_ret}})
+    paging_encoded = json.dumps({"paging":paging_parse_ret})
+    
+    #output the json string to system_resource.js file
+    #result_js = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '../PerfTestRes/htmlresult/js/system_resource.js'))
+    result_js = ret_html_folder + 'js/system_resource.js'
+    if os.path.exists(result_js):
+        os.remove(result_js)
+    try:
         fd = open(result_js, 'a')
+    except:
+        sys.exit("Open %s fail!" % result_js)
+    
+    try:
         fd.write("var cpu_data = %s;\n" % cpu_encoded)
         fd.write("var mem_data = %s;\n" % mem_encoded)
         fd.write("var disk_data = %s;\n" % disk_encoded)
         fd.write("var paging_data = %s;\n" % paging_encoded)
-    except (ParseResultError, Exception), err:
-        sys.exit(err)
+        fd.close()
+    except:
+        sys.exit("Write system resource statisitc to file fail")
     finally:
-        if fd: 
-            fd.close()
+        fd.close()
+
+    ###############################
+    # Output sandbox statistic result to file
+    ##############################
+    sbx_queue_encoded = json.dumps({"Sandbox_queue":{"Submited":sbx_sub_que_parse_ret, "To_be_submited":sbx_wait_que_parse_ret}})
+    result_js = ret_html_folder + 'js/sandbox_queue.js'
+    if os.path.exists(result_js):
+        os.remove(result_js)
+    try:
+        fd = open(result_js, 'a')
+    except:
+        sys.exit("Open %s file fail" % result_js)
+
+    try:
+        fd.write("var sbx_que = %s;\n" % sbx_queue_encoded)
+    except:
+        sys.exit("Write sbx queue statistic to file fail")
+    finally: 
+        fd.close()
+
+    
