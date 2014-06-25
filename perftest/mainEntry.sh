@@ -304,6 +304,8 @@ init()
 	
 	#Clean maillog
 	> $MAIL_LOG
+    > /opt/trend/ddei/MsgTracing/PostLogBookmark.txt
+    > /opt/trend/ddei/MsgTracing/PostLogTimestamp.txt
 	echo -e "\tClean postfix maillog successfully..."
 
 	#Clean db tables
@@ -342,7 +344,7 @@ init()
 	fi
 	echo -e "\tStart telnetd successfully..."
 	
-	/opt/trend/ddei/u-sandbox/usandbox/cli/usbxcli.py set-cache --switch off > /dev/null
+	/opt/trend/ddei/u-sandbox/usandbox/cli/usbxcli.py set-cache --switch OFF > /dev/null
 	echo -e "\tDisable sandbox cache successfully..."
 
 	if [ "`grep '192.168' /etc/resolv.conf`" == "" ]
