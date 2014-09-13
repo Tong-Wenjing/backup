@@ -32,13 +32,15 @@ from email.mime.text import MIMEText
 # Global Variables
 COMMASPACE = ','
 
+class createEmailError(Exception):
+    pass
+
 def cli_parser():
     """
     Create the parameters which would be used by this script
-    Usage:
-
-    return: argparse object
-
+    Params: None
+    Return: argparse object
+    Exception: None
     """
     parser = argparse.ArgumentParser(prog='CreateEmail',
                                      description='This script is used for generating an email with .eml extension')
@@ -191,9 +193,19 @@ def main():
     ##########################################################################
     # Output the composed message object to file
     ##########################################################################
-    fp = open(output, 'w')
-    fp.write(outer_msg.as_string())
-    fp.close()
+    try:
+        fp = open(output, 'w')
+    except Exception as err:
+        raise createEmailError("The output file cannot be opened for [%s]" % err)
+    try: 
+        fp.write(outer_msg.as_string())
+    except Exception as err:
+        raise createEmailError("The output file cannot be written for [%s]" % err)
+    finally:
+        fp.close()
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except (createEmailError, Exception) as err:
+        print err
