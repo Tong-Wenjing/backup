@@ -1,0 +1,57 @@
+{
+    // Customize cursor style per mode
+    "vim.cursorStylePerMode": {
+        "normal": "underline",
+        "insert": "line-thin",
+        "replace": "block-outline"
+    },
+
+    // Enable the EasyMotion plugin for Vim.
+    "vim.easymotion": true,
+
+    // 控制字体系列。
+    "editor.fontFamily": "Source Code Pro, Consolas, 'Courier New', monospace",
+    // 以像素为单位控制字号。
+    "editor.fontSize": 16,
+
+    // Show all matches of the most recent search pattern
+    "vim.hlsearch": true,
+    
+    // Override VSCode's copy command with our own copy command, which works better with . Turn this off if copying is not working.
+    "vim.overrideCopy": false,
+
+    // Use system clipboard for unnamed register.
+    "vim.useSystemClipboard": true,
+
+    // When typing a command show the initial colon ':' character
+    "vim.cmdLineInitialColon": true,
+
+    // Option to delegate certain key combinations back to VSCode to be handled natively
+    "vim.handleKeys": {
+        "<C-a>": false
+    },
+
+    // Allow VSCodeVim to change status bar color based on mode
+    "vim.statusBarColorControl": true,
+
+    // In visual mode, start a search with * or # using the current selection
+    "vim.visualstar": true,
+
+    // Customize colors per mode when VSCodeVim controls status bar colors
+    "vim.statusBarColors": {
+        "normal": ["#8FBCBB", "#434C5E"],
+        "insert": "#BF616A",
+        "visual": "#B48EAD",
+        "visualline": "#B48EAD",
+        "visualblock": "#A3BE8C",
+        "replace": "#D08770"
+    },
+
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#8FBCBB",
+        "statusBar.noFolderBackground": "#8FBCBB",
+        "statusBar.debuggingBackground": "#8FBCBB",
+        "statusBar.foreground": "#434C5E"
+    },
+    "team.showWelcomeMessage": false
+}
